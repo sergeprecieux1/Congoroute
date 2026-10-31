@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CongoRoute</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f4f8;
+}
+
+header {
+  background: #073b75;
+  color: white;
+  padding: 17px;
+  text-align: center;
+}
+
+header h2 { margin: 0; }
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  background: white;
+  padding: 13px 5px;
+}
+
+nav span {
+  color: #073b75;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+main { padding: 12px; }
+
+select {
+  width: 100%;
+  padding: 13px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+#map {
+  height: 65vh;
+  min-height: 350px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.info {
+  background: white;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 8px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>🇨🇩 CongoRoute</h2>
+<p>Votre information routière en RDC</p>
+</header>
+
+<nav>
+<span>Accueil</span>
+<span>Trafic</span>
+<span>Signalement</span>
+</nav>
+
+<main>
+
+<select id="city" onchange="changeCity()">
+<option value="lubumbashi">Lubumbashi</option>
+<option value="kinshasa">Kinshasa</option>
+</select>
+
+<div id="map"></div>
+
+<div class="info">
+<strong>Bienvenue sur CongoRoute !</strong>
+<p>Consultez les routes et les avenues de votre ville.</p>
+<p>Les informations de circulation seront progressivement ajoutées.</p>
+</div>
+
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+var map = L.map('map').setView([-11.6647, 27.4794], 13);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap'
+}).addTo(map);
+
+function changeCity() {
+  var city = document.getElementById('city').value;
+
+  if (city === 'kinshasa') {
+    map.setView([-4.325, 15.322], 12);
+  } else {
+    map.setView([-11.6647, 27.4794], 13);
+  }
+}
+</script>
+
+</body>
+</html>
